@@ -1,7 +1,7 @@
 <h1>Planets</h1>
 <div class="list">
   <p ng-hide="p.list">Loading...</p>
-  <table class="table table-bordered table-striped" ng-show="p.list">
+  <table class="table table-bordered" ng-show="p.list">
     <thead>
       <th>Planet</th>
       <th>Residents</th>
@@ -14,7 +14,9 @@
         <td>
           <ul>
             <li ng-repeat="url in planet.residents">
-              <a ui-sref='resident({id: p.extractId(url)})'>resident {{$index + 1}}</a>
+              <a ui-sref='resident({id: p.extractId(url)})'>
+                {{ p.residentName(p.extractId(url), $index) }}
+              </a>
             </li>
           </ul>
         </td>

@@ -16,6 +16,8 @@ swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
                     err => console.error(err));
   }
 
+  this.residentName = dataSvc.residentName;
+
   this.extractId = url => url.split('/').slice(-2)[0];
 }]);
 

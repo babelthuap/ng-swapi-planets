@@ -13,4 +13,8 @@ swapiApp.service('dataSvc', ['$http', function($http) {
   this.getCharacter = function(id) {
     return $http.get('http://swapi.co/api/people/' + id + '/?format=json');
   }
+
+  this.residentName = (id, i) => {
+    return this.residents[id] ? this.residents[id].name : 'resident ' + i;
+  }
 }]);
