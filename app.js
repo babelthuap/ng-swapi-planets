@@ -41,12 +41,12 @@ swapiApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('planets', {
       url: "/planets",
-      templateUrl: "planets.html",
+      templateUrl: "templates/planets.html",
       controller: "PlanetsCtrl as p"
     })
     .state('resident', {
       url: "/resident/:id",
-      templateUrl: 'resident.html',
+      templateUrl: 'templates/resident.html',
       controller: 'ResidentCtrl as r'
     })
 
