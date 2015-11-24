@@ -3,14 +3,14 @@
 var swapiApp = angular.module('swapiApp');
 
 swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
-  this.list = dataSvc.planets;
+  this.planets = dataSvc.planets;
 
-  console.log('this.list:', this.list); // DEBUG
+  console.log('this.planets:', this.planets); // DEBUG
 
-  if (this.list.length === 0) {
+  if (this.planets.length === 0) {
     var getPlanets = dataSvc.getPlanets();
     getPlanets.then(res => {
-                      this.list = res.data.results;
+                      this.planets = res.data.results;
                       dataSvc.planets = res.data.results;
                     },
                     err => console.error(err));

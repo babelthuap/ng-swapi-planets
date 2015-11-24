@@ -1,13 +1,13 @@
 <h1>Planets</h1>
-<div class="list">
-  <p ng-hide="p.list">Loading...</p>
-  <table class="table table-bordered" ng-show="p.list">
+<div class="planets">
+  <p ng-hide="p.planets">Loading...</p>
+  <table class="table table-bordered" ng-show="p.planets">
     <thead>
       <th>Planet</th>
       <th>Residents</th>
     </thead>
     <tbody>
-      <tr ng-repeat="planet in p.list">
+      <tr ng-repeat="planet in p.planets">
         <td>{{planet.name}}</td>
       
         <!-- list residents -->
