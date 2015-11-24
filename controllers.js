@@ -6,12 +6,26 @@ swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
   this.planets = dataSvc.planets;
 
   if (this.planets.length === 0) {
-    var getPlanets = dataSvc.getPlanets();
-    getPlanets.then(res => {
-                      this.planets = res.data.results;
-                      dataSvc.planets = res.data.results;
-                    },
-                    err => console.error(err));
+    let getPlanets = dataSvc.getPlanets();
+    getPlanets.then(pages => {
+      // Here, I'm trying to fetch all the planet pages at once (using Promise.all
+      // in dataSvc.getPlanets). The ajax calls work, but the view never updates. I
+      // haven't been able to figure out why.
+
+      // (The deployed version, which only fetches the first page, works flawlessly.)
+
+      console.log('pages:', pages)
+      let arr = pages.reduce(function(a, b) {
+        return a.concat( b.data.results );
+      }, []); 
+      console.log('arr:', arr)
+
+      this.planets = arr;
+      dataSvc.planets = arr;
+
+      console.log('this.planets:', this.planets)
+    },
+    err => console.error(err));
   }
 
   this.residentName = dataSvc.residentName;
@@ -27,11 +41,11 @@ swapiApp.controller('ResidentCtrl', ['$stateParams', 'dataSvc', function($stateP
   if (this.residents[this.id]) {
     this.character = this.residents[this.id];
   } else {
-    var getCharacter = dataSvc.getCharacter(this.id);
+    let getCharacter = dataSvc.getCharacter(this.id);
     getCharacter.then(res => {
-                        this.character = res.data;
-                        this.residents[this.id] = res.data;
-                      },
-                      err => console.error(err));
+      this.character = res.data;
+      this.residents[this.id] = res.data;
+    },
+    err => console.error(err));
   }
 }]);
