@@ -5,8 +5,6 @@ var swapiApp = angular.module('swapiApp');
 swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
   this.planets = dataSvc.planets;
 
-  console.log('this.planets:', this.planets); // DEBUG
-
   if (this.planets.length === 0) {
     var getPlanets = dataSvc.getPlanets();
     getPlanets.then(res => {
@@ -25,8 +23,6 @@ swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
 swapiApp.controller('ResidentCtrl', ['$state', '$stateParams', 'dataSvc', function($state, $stateParams, dataSvc) {
   this.id = $stateParams.id;
   this.residents = dataSvc.residents;
-
-  console.log('this.residents:', this.residents); // DEBUG
 
   if (this.residents[this.id]) {
     this.character = this.residents[this.id];
