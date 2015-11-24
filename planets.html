@@ -1,0 +1,25 @@
+<h1>Planets</h1>
+<div class="list">
+  <p ng-hide="p.list">Loading...</p>
+  <table class="table table-bordered table-striped" ng-show="p.list">
+    <thead>
+      <th>Planet</th>
+      <th>Residents</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="planet in p.list">
+        <td>{{planet.name}}</td>
+      
+        <!-- list residents -->
+        <td>
+          <ul>
+            <li ng-repeat="url in planet.residents">
+              <a ui-sref='resident({id: p.extractId(url)})'>resident {{$index + 1}}</a>
+            </li>
+          </ul>
+        </td>
+      
+      </tr>
+    </tbody>
+  </table>
+</div>

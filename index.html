@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="swapiApp">
+
+<head>
+  <title>Star Wars Fun</title>
+  <!-- Bootstrap CSS -->
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Angular -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
+  <!-- UI-Router -->
+  <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+</head>
+
+<body class="container">
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Quick Start</a>
+      <ul class="nav">
+        <li><a ui-sref="route1">Route 1</a></li>
+        <li><a ui-sref="route2">Route 2</a></li>
+        <li><a ui-sref="users({id: 7, msg: 'Hello!'})">User 7</a></li>
+        <li><a ui-sref="planets">Star Wars Planets</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <div class="well" ui-view></div>        
+    </div>
+  </div>         
+  
+  <!-- App Script -->
+  <script src="app.js"></script>
+</body>
+</html>
