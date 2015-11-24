@@ -16,16 +16,12 @@ swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
       // this.planets = pages.data.results;
       // dataSvc.planets = pages.data.results;
 
-      console.log('fetched pages:', pages)
       let arr = pages.reduce(function(a, b) {
         return a.concat( b.data.results );
       }, []); 
-      console.log('flattened array of planets:', arr)
 
       this.planets = arr;
       dataSvc.planets = arr;
-
-      console.log('this.planets (which SHOULD update the view):', this.planets)
 
       // crap! this works, but it's a silly workaround
       window.location.replace('#');
