@@ -1,28 +1,39 @@
+'use strict';
+
 var swapiApp = angular.module('swapiApp');
 
-swapiApp.controller('PlanetsCtrl', ['$http', function($http) {
-  $http.get('http://swapi.co/api/planets/?format=json')
-  .then(res => this.list = res.data.results,
-        err => console.log('GET ERROR:', err));
+swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
+  this.list = dataSvc.planets;
+
+  console.log('this.list:', this.list); // DEBUG
+
+  if (this.list.length === 0) {
+    var getPlanets = dataSvc.getPlanets();
+    getPlanets.then(res => {
+                      this.list = res.data.results;
+                      dataSvc.planets = res.data.results;
+                    },
+                    err => console.error(err));
+  }
 
   this.extractId = url => url.split('/').slice(-2)[0];
 }]);
 
-swapiApp.controller('ResidentCtrl', ['$state', '$stateParams', 'residentSvc',
-  function($state, $stateParams, residentSvc) {
-    this.id = $stateParams.id;
-    this.residents = residentSvc.residents;
 
-    if (this.residents[this.id]) {
-      this.character = this.residents[this.id];
-    } else {
-      var getCharacter = residentSvc.getCharacter(this.id);
+swapiApp.controller('ResidentCtrl', ['$state', '$stateParams', 'dataSvc', function($state, $stateParams, dataSvc) {
+  this.id = $stateParams.id;
+  this.residents = dataSvc.residents;
 
-      getCharacter.then(res => {
-                          this.character = res.data;
-                          this.residents[this.id] = res.data;
-                        },
-                        err => console.log('GET ERROR:', err));
-    }
+  console.log('this.residents:', this.residents); // DEBUG
+
+  if (this.residents[this.id]) {
+    this.character = this.residents[this.id];
+  } else {
+    var getCharacter = dataSvc.getCharacter(this.id);
+    getCharacter.then(res => {
+                        this.character = res.data;
+                        this.residents[this.id] = res.data;
+                      },
+                      err => console.error(err));
   }
-]);
+}]);
