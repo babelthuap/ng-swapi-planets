@@ -20,7 +20,7 @@ swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
 }]);
 
 
-swapiApp.controller('ResidentCtrl', ['$state', '$stateParams', 'dataSvc', function($state, $stateParams, dataSvc) {
+swapiApp.controller('ResidentCtrl', ['$stateParams', 'dataSvc', function($stateParams, dataSvc) {
   this.id = $stateParams.id;
   this.residents = dataSvc.residents;
 
