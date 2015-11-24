@@ -3,19 +3,17 @@
 var swapiApp = angular.module('swapiApp');
 
 swapiApp.service('dataSvc', ['$http', function($http) {
+  const NUM_PAGES = 7;
+
   this.planets = [];
   this.residents = {};
 
   this.getPlanets = function() {
-    // only fetch the first page:
-    // return $http.get('http://swapi.co/api/planets/?format=json');
-
     let pages = [];
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= NUM_PAGES; i++) {
       pages.push( $http.get('http://swapi.co/api/planets/?format=json&page=' + i) );
     }
     return Promise.all(pages);
-    
   }
 
   this.getCharacter = function(id) {
