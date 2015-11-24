@@ -27,6 +27,8 @@ swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
 
       console.log('this.planets (which SHOULD update the view):', this.planets)
 
+      // crap! this works, but it's a silly workaround
+      window.location.replace('#');
     },
     err => console.error(err));
   }
