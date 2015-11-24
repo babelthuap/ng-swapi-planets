@@ -7,11 +7,15 @@ swapiApp.service('dataSvc', ['$http', function($http) {
   this.residents = {};
 
   this.getPlanets = function() {
+    // only fetch the first page:
+    // return $http.get('http://swapi.co/api/planets/?format=json');
+
     let pages = [];
     for (let i = 1; i <= 7; i++) {
       pages.push( $http.get('http://swapi.co/api/planets/?format=json&page=' + i) );
     }
     return Promise.all(pages);
+    
   }
 
   this.getCharacter = function(id) {

@@ -12,18 +12,21 @@ swapiApp.controller('PlanetsCtrl', ['dataSvc', function(dataSvc) {
       // in dataSvc.getPlanets). The ajax calls work, but the view never updates. I
       // haven't been able to figure out why.
 
-      // (The deployed version, which only fetches the first page, works flawlessly.)
+      // The deployed version, which only fetches the first page, works flawlessly:
+      // this.planets = pages.data.results;
+      // dataSvc.planets = pages.data.results;
 
-      console.log('pages:', pages)
+      console.log('fetched pages:', pages)
       let arr = pages.reduce(function(a, b) {
         return a.concat( b.data.results );
       }, []); 
-      console.log('arr:', arr)
+      console.log('flattened array of planets:', arr)
 
       this.planets = arr;
       dataSvc.planets = arr;
 
-      console.log('this.planets:', this.planets)
+      console.log('this.planets (which SHOULD update the view):', this.planets)
+
     },
     err => console.error(err));
   }
